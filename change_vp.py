@@ -7,11 +7,12 @@ def main(args):
 
   # This array has updated by info from user!
   screen_array = ['PAND1.681','PBAT1.697']
+#  screen_array = ['PAND1.681']
   screens= {}
 
   # Layout of dictionary for the new binaries!
   screens[screen_array[0]] = 'SCREEN$FILE.PAND1.681=66482\n'
-  screens[screen_array[1]] = 'SCREEN$FILE.PBAT1.697=140868'
+  screens[screen_array[1]] = 'SCREEN$FILE.PBAT1.697=140868\n'
 
 
   # Check that screen_array not empty!
