@@ -30,17 +30,20 @@ def main(args):
   # new version.properties file!!
   writefile = open("eversions.properties", "w")
 
-  # Check what rows that needs to be updated!
-  for scr in screen_array:
-      stringen = "SCREEN\$FILE\." + scr +"\=[0-9]+"
-      match_row = re.compile(stringen)
-
-      for row in readfile:
+  for row in readfile:  
+      flip = False
+      for scr in screen_array:
+          stringen = "SCREEN\$FILE\." + scr +"\=[0-9]+"
+          match_row = re.compile(stringen)
+  
           if match_row.search(row):
               writefile.write(screens[scr])
-              print "hurra!"
-          else:
+              #print "hurra!"
+          elif not flip:
               writefile.write(row)
+              flip = True
+          else:
+              pass
 
 if __name__ == '__main__':
     sys.exit(main(sys.argv[1:] or 0))
