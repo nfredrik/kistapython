@@ -33,10 +33,12 @@ def main(args):
   for row in readfile:  
       flip = False
       for scr in screen_array:
-          stringen = "SCREEN\$FILE\." + scr +"\=[0-9]+"
+          stringen = "\(SCREEN\$FILE\." + scr +"\=\)[0-9]+"
           match_row = re.compile(stringen)
   
-          if match_row.search(row):
+          match = match_row.search(row)
+          if match != None:
+              print match.groups(0)  
               writefile.write(screens[scr])
               #print "hurra!"
           elif not flip:
