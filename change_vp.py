@@ -30,6 +30,7 @@ def main(args):
   # new version.properties file!!
   writefile = open("eversions.properties", "w")
 
+
   for row in readfile:
       hit = False
       # Check what rows that needs to be updated!
@@ -44,7 +45,6 @@ def main(args):
 
       if not hit:
           writefile.write(row)
-
 
 if __name__ == '__main__':
     sys.exit(main(sys.argv[1:] or 0))
