@@ -2,7 +2,7 @@
 >>> x = Stack() # make a stack object, push items
 >>> x.push('spam')
 >>> x.push(123)
->>> x # __repr__ prints a stack
+>>> x
 [Stack:[123, 'spam']]
 >>> y = Stack() # two distinct stack objects
 >>> y.push(3.1415) # they do not share content
@@ -11,18 +11,14 @@
 ([Stack:['spam']], [Stack:[123, 3.1415]])
 >>> z = Stack() # third distinct stack object
 >>> for c in 'spam': z.push(c)
-...
->>> while z: # __len__ tests stack truth
-... print(z.pop(), end=' ')
-...
-m a p s >>>
+>>> while z: print z.pop(),
+m a p s
 >>> z = x + y # __add__ handles stack +
 >>> z # holds three different types
 [Stack:['spam', 123, 3.1415]]
->>> for item in z: # __getitem__ does for
-... print(item, end=' ')
-...
-spam 123 3.1415 >>>
+>>> for item in z: print item,     # __getitem__ does for
+spam 123 3.1415
 >>> z.reverse() # __getattr__ delegates to list
 >>> z
 [Stack:[3.1415, 123, 'spam']]
+

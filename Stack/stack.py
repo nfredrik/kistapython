@@ -4,7 +4,7 @@ class error(Exception): pass # when imported: local exception
 
 class Stack:
     def __init__(self, start=[]): # self is the instance object
-        self.stack = [] # start is any sequence: stack..
+        self.stack = [] # start is any sequence: stack.p.
         for x in start: self.push(x)
         self.reverse() # undo push's order reversal
 
@@ -13,7 +13,8 @@ class Stack:
 
     def pop(self):
         if not self.stack: raise error('underflow')
-        top = self.stack.pop()
+        top = self.stack.pop(0)
+        #print 'stack now:', top
         return top
 
     def top(self):
