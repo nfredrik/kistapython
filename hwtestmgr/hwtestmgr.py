@@ -20,6 +20,50 @@ class ThreadedTCPRequestHandler(SocketServer.BaseRequestHandler):
 class ThreadedTCPServer(SocketServer.ThreadingMixIn, SocketServer.UnixStreamServer):
     pass
 
+def register(agentId):
+    bytes = bytearray()
+    bytes.append(4)  # size
+    bytes.append(MSG_REGISTER)
+    bytes.append(agentId)
+
+    return bytes
+
+def done(agentId):
+    bytes = bytearray()
+    bytes.append(4)  # size
+    bytes.append(MSG_REGISTER)
+    bytes.append(agentId)
+    bytes.append(FAULTCODE1)
+    return bytes
+
+def send_message(msg):
+   sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+    sock.connect(UDS_PATH)
+    try:
+        sock.sendall(msg)
+    finally:
+        sock.close()
+
+
+def do_client_stuff():
+    """
+    When called, try to register to hwtestmgr.
+    prepare to receive start-message
+    wait a random time, i.e. simulate testing
+    report back result to hwtestmgr 
+    """
+    register_msg = register(27)
+    send_msg(register_msg)
+
+    response = sock.recv(1024)
+
+    time.sleep(2)
+
+    done_msg = done(27) 
+    send_msg(done_msg)
+
+
+
 def client(ip, port, message):
     sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
     sock.connect(UDS_PATH)

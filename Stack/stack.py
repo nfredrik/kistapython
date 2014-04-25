@@ -1,8 +1,11 @@
+from invariants import EnforceCheckRep
+
 "a multi-instance stack class"
 
 class error(Exception): pass # when imported: local exception
 
 class Stack:
+    __metaclass__ = EnforceCheckRep # the ONLY line you need to add to the class definition
     def __init__(self, start=[]): # self is the instance object
         self.stack = [] # start is any sequence: stack.p.
         for x in start: self.push(x)
@@ -46,3 +49,11 @@ class Stack:
     def __getattr__(self, name):
         return getattr(self.stack, name) # instance.sort()/reverse()/..
 
+    def checkRep(self):
+
+        assert True
+        for i in self.stack:
+            pass   
+            #assert type(i) in [type(str), type(float), type(int)], 'wrong!'
+
+    
