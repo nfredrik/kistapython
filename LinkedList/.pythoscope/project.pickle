@@ -1,0 +1,18 @@
+Äcpythoscope.store
+Project
+q)Åq}q(Upoints_of_entryq}UpathqU'C:\Users\fredrik\kistapython\LinkedListUcode_trees_managerqcpythoscope.code_trees_manager
+FilesystemCodeTreesManager
+q)Åq}q	(U_cached_code_treeq
+NUcode_trees_pathqU>C:\Users\fredrik\kistapython\LinkedList\.pythoscope\code-treesubU_modulesq}q(Utests\test_linked_list.pyqcpythoscope.store
+Module
+q)Åq}q(Uerrorsq]UparentqNUcreatedqGA‘ÊÉ˚©XUimportsq]qUunittestqaUchangedqâUsubpathqhUprojectqhUobjectsq]q(cpythoscope.store
+TestClass
+q)Åq}q(Unameq UTestNodehhh]q!hahâUassociated_modulesq"]q#h)Åq$}q%(h]hNhGA‘ÊÉ⁄ºjh]hâhUlinked_list.pyq&hhh]q'(cpythoscope.store
+Class
+q()Åq)}q*(Ubasesq+]Uuser_objectsq,]h UNodeUmoduleq-h$Umethodsq.]q/(cpythoscope.store
+Method
+q0)Åq1}q2(Uis_generatorq3âUargsq4]q5(Uselfq6Ucargoq7Unextq8eh U__init__Uklassq9h)ubh0)Åq:}q;(h3âh4]q<Uselfq=ah U__str__h9h)ubh0)Åq>}q?(h3âh4]q@UselfqAah Uprint_backwardh9h)ubeubh()ÅqB}qC(h+]h,]h U
+LinkedListh-h$h.]qD(h0)ÅqE}qF(h3âh4]qGUselfqHah U__init__h9hBubh0)ÅqI}qJ(h3âh4]qKUselfqLah Uprint_backwardh9hBubh0)ÅqM}qN(h3âh4]qO(UselfqPUcargoqQeh UaddFirsth9hBubeubeU
+test_casesqR]ubahR]qS(cpythoscope.store
+TestMethod
+qT)ÅqU}qV(h Utest___init__qWhhubhT)ÅqX}qY(h Utest___str__qZhhubhT)Åq[}q\(h Utest_print_backwardq]hhubeubh)Åq^}q_(h UTestLinkedListhhhh!hâh"]q`h$ahR]qa(hT)Åqb}qc(h Utest___init__qdhh^ubhT)Åqe}qf(h Utest_addFirstqghh^ubhT)Åqh}qi(h Utest_print_backwardqjhh^ubeubehR]qk(hh^eubh&h$uUnew_tests_directoryqlUtestsub.

@@ -1,3 +1,5 @@
+from invariants import EnforceCheckRep
+
 class Node:
     def __init__(self, cargo=None, next=None):
         self.cargo = cargo
@@ -15,6 +17,7 @@ class Node:
 
 
 class LinkedList:
+    __metaclass__ = EnforceCheckRep # the ONLY line you need to add to the class definition
     def __init__(self):
         self.length = 0
         self.head   = None
@@ -30,6 +33,30 @@ class LinkedList:
         node.next = self.head
         self.head = node
         self.length = self.length + 1
+
+    def removeSecond(self):
+        if self.head == None: return
+        first = self.head
+        second = self.head.next
+        # make the first node refer to the third
+        first.next = second.next
+         # separate the second node from the rest of the list
+        second.next = None
+        self.length-=1
+        return second
+
+    def checkRep(self):
+        #print 'checkRep()'
+        cntr=0
+        self.tmp = self.head
+        while self.tmp != None:
+            cntr+=1
+            self.tmp = self.tmp.next
+
+        assert self.length == cntr, "%d %d" % (self.length, cntr)
+
+
+
 
 
 if __name__ == '__main__':
@@ -49,4 +76,7 @@ if __name__ == '__main__':
     list.addFirst(3)
     list.addFirst(5)
 
+    list.print_backward()
+
+    list.removeSecond()
     list.print_backward()
