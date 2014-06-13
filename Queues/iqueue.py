@@ -14,12 +14,13 @@ class Queue:
     def insert(self, cargo):
         node = Node(cargo)
         node.next = None
-        if self.head == None:
+        if self.is_empty():
             # if list is empty the new node goes first
             self.head = self.last = node
         else:
             last = self.last
             last.next = node
+            self.last = node
         self.length = self.length + 1
 
     def remove(self):
