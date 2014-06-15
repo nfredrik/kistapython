@@ -10,6 +10,16 @@ class Queue:
     def is_empty(self):
         return (self.length == 0)
 
+    def size(self):
+        return self.length
+
+    def isEmpty(self):
+        return self.length == 0
+
+    def enqueue(self, cargo):
+        self.insert(cargo)
+
+
     def insert(self, cargo):
         node = Node(cargo)
         node.next = None
@@ -24,6 +34,9 @@ class Queue:
             last.next = node
         self.length = self.length + 1
 
+    def dequeue(self):
+        return self.remove()
+
     def remove(self):
         cargo = self.head.cargo
         self.head = self.head.next
@@ -31,7 +44,7 @@ class Queue:
         return cargo
 
     def checkRep(self):
-        print "checkrRep"
+        #print "checkrRep"
         cntr = 0
         tmp = self.head
         while tmp:
@@ -50,3 +63,14 @@ if __name__ == '__main__':
 
     for i in range(3):
         print queue1.remove()
+
+
+    queue1 = Queue()
+
+    queue1.enqueue(5)
+    queue1.enqueue(3)
+    queue1.enqueue(1)
+
+    while not queue1.isEmpty():
+        print queue1.remove()
+
