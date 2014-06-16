@@ -3,11 +3,11 @@ import threading, time
 class LeakyBucket:
     '''the leaky bucket throttling the bit rate'''
 
-    def __init__(self, node, bitsPerSec, measIntv, LBtype):
-        self.node = node
+    def __init__(self, bitsPerSec, measIntv):
         self.bitsPerSec = bitsPerSec  #the rate limit
-        self.measIntv = measIntv      #the measure interval, tokens will become full at the beginning of each interval
-        self.LBtype = LBtype          #the type of the bucket  
+        self.measIntv = measIntv      #the measure interval, tokens will
+                                      # become full at the beginning of each interval
+
         self.lastTime = 0             #the start time of the last measure interval
         self.bitsDone = 0             #the bits that have been transmitted
         self.BDLock = threading.Lock() #the lock for the bits sent
@@ -29,18 +29,20 @@ class LeakyBucket:
         self.lastTime = time.time()   #record the start time
         while True:
             timeNow = time.time() 
+            
             if  timeNow - self.lastTime > self.measIntv:     
                 #new intv, need to reset token
                 self.token = self.maxToken
                 self.lastTime = timeNow
+            
             self.condition.acquire()
             if self.packDQ: # the queue is not empty
                 pack = list(self.packDQ)[0]
                 packLen = len(pack[2])*8
                 if  packLen > self.token:   #no enough token?
-                    #self.packDQ.popleft()
                     self.condition.release()
                     time.sleep(max(self.lastTime+self.measIntv-time.time(),0)) #wait for enough token
+
                 else:              #enough token, can send out the packet
                     self.packDQ.popleft()
                     self.condition.release()
@@ -89,7 +91,7 @@ def main():
     pack = 1000*'a'
     msg = ('192.168.1.1', 16000, pack)
     print 'here'
-    LB = LeakyBucket(None, 500*1024, 1, 'reg')
+    LB = LeakyBucket(bitsPerSec=500*1024, measIntv=1)
     LB.begin()
     LB.startMeasure(10)
     numMsg = 0
@@ -100,4 +102,6 @@ def main():
         numMsg += 1
 
 if __name__ == '__main__':
+
+# TODO: Add my Queue + add random generation of bits + show how big bucket are
     main()
