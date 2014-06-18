@@ -1,0 +1,3 @@
+alias ph !help(%1)
+alias redefined p 'home definition'
+break 11
