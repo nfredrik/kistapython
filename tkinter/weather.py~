@@ -1,0 +1,35 @@
+import Tkinter
+
+
+class WeatherReporter:
+    def __init__(self, root):
+        self.root = root
+        self.top_frame()
+        self.display_frame()
+
+    def top_frame(self):
+        topfrm= Frame(self.root)
+        topfrm.grid(row=1, sticky='w')
+        Label(topfrm, text='Enter Location').grid(row=1, column=2, sticky='w')
+        self.entereredlocation = StringVar()
+        Entry(topfrm, textvariable= self.entereredlocation).grid(row=1, column=2, sticky='w')
+        ttk.Button(topfrm, text='Show Weather Info', command=self.show_weather_button_clicked).grid(row=1, column=3, sticky='w')
+
+    def display_frame(self):
+        displayfrm = Frame(self.root)
+        displayfrm.grid(row=2, sticky='ew', columnspan=5)
+        self.canvas= Canvas(displayfrm, height'410', width='300',background='black', borderwidth=5)
+        self.canvas.create_rectange(5,5,305,415, fill '#F6AF06')
+        self.canvas.grig(row=2, sticky='w', columnspan=5)
+
+
+
+def main():
+    root=Tk()
+    WeatherReporter(root)
+    root.mainloop()
+
+
+
+if __name__ == '__main__':
+    main()

@@ -24,4 +24,4 @@ if __name__ == '__main__':
      pq.insert(tiger)
      pq.insert(phil)
      pq.insert(hal)
-      while not pq.is_empty(): print pq.remove()
+     while not pq.is_empty(): print pq.remove()
