@@ -54,10 +54,16 @@ def main():
     There are many ways to do this, but here's one way that is easy to reason about
     and is fast enough for our purposes: 
 
-    go through every word in the word_list, and for every letter in that word, see if
-    that letter is  contained in the rack. If it is, save the word in a valid_words list.
-    Make sure you  handle repeat letters: once a letter from the rack has been used, 
-    it can't be used again.
+    1. go through every word in the word_list, and 
+
+    2. for every letter in that word, 
+
+    3. see if that letter is  contained in the rack. 
+       If it is, save the word in a valid_words list.
+
+    4. Make sure you  handle repeat letters: once 
+       a letter from the rack has been used, 
+       it can't be used again.
     """
 
 
@@ -65,18 +71,18 @@ def main():
 
 
     for word in word_list:                         # get a word from the dictionary
-        cntr = 0 
+
         rack = list(rack_letters[0])
 
         for r_letter in rack:                      # get a letter from the rack word
-
+            cntr = 0 
             for letter in word:                         # get a letter of the word     
 #                print letter,r_letter, idx  
                 if letter == r_letter:                   # letter from word in rack word?
 #                    print rack
                     rack.pop()
                     cntr+=1
-#                    break
+                    break
 
             if len(word) == cntr:                  # if all letter in word matches rack store it
 #               print 'addin', word
