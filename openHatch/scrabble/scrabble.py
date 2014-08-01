@@ -13,42 +13,79 @@ scores = {"a": 1, "c": 3, "b": 3, "e": 1, "d": 2, "g": 2,
 def main():
 
     # Contruct a word list
-    words = []
+    word_list = []
     with open('sowpods.txt', 'r') as sowpods:
-        words = sowpods.read().strip().splitlines()
+#    with open('psowpods.txt', 'r') as sowpods:
+        word_list = sowpods.read().lower().strip().splitlines()
 
-    # print words[-1]
+    # print word_list[-1]
 
     # Get the rack
 
     parser = argparse.ArgumentParser(description='Scrabble cheater.')
 
     parser.add_argument('nisse', action="store",  help='a word', nargs='+')
-#    parser.add_argument('integers', metavar='N', type=int, nargs='+',  help='an integer for the accumulator')
-#   parser.add_argument('--sum', dest='accumulate', action='store_const', const=sum, default=max,help='sum the integers (default: find the max)')
 
     args = parser.parse_args()
 
     #print args
-    valid_list = []
+    rack_letters = []
     for i in  args.nisse:
         if re.match('[a-zA-Z]+',i):
-            valid_list.append(i.lower())
+            rack_letters.append(i.lower())
         else:
             print "Not valid word", i
 
-    print valid_list
-    # Find valid words
+    print rack_letters
+    # Find valid word_list
 
     valid_words = []
 
-    #for cc in valid_list:
-    
-    for w in words:
-        for l in w:
-           for x, y in enumerate(valid_list[0])
-               if l == y:
-                   valid_list.pop(x)
+    #for cc in rack_letters:
+
+    #print word_list[0]
+    """
+
+    https://openhatch.org/wiki/Scrabble_challenge
+
+    Write the code to find all words from the word_list that are made of letters
+    that are a subset of the rack_letters. 
+
+    There are many ways to do this, but here's one way that is easy to reason about
+    and is fast enough for our purposes: 
+
+    go through every word in the word_list, and for every letter in that word, see if
+    that letter is  contained in the rack. If it is, save the word in a valid_words list.
+    Make sure you  handle repeat letters: once a letter from the rack has been used, 
+    it can't be used again.
+    """
+
+
+
+
+
+    for word in word_list:                         # get a word from the dictionary
+        cntr = 0 
+        rack = list(rack_letters[0])
+
+        for r_letter in rack:                      # get a letter from the rack word
+
+            for letter in word:                         # get a letter of the word     
+#                print letter,r_letter, idx  
+                if letter == r_letter:                   # letter from word in rack word?
+#                    print rack
+                    rack.pop()
+                    cntr+=1
+#                    break
+
+            if len(word) == cntr:                  # if all letter in word matches rack store it
+#               print 'addin', word
+                valid_words.append(word)
+
+#    print len(valid_words)
+
+    for i in valid_words:
+        print i
                            
                     
     # Scoring
