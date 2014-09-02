@@ -6,10 +6,7 @@ def readfiles(filenames):
             yield line
 
 def grep(pattern, lines):
-    print lines
-    return (line for line in lines if pattern in lines)
-    return (line for line in lines if 'class' in lines)
-#    return (line for line in lines)
+    return (line for line in lines if pattern in line)
 
 def printlines(lines):
     for line in lines:
