@@ -2,6 +2,7 @@
 
 # Standard library imports
 import socket
+import sys
 
 HOST = 'localhost'
 PORT = 50505
@@ -124,7 +125,7 @@ def handle_delete(key):
             )
     else:
         del DATA[key]
-
+        return (True, 'Key [{}] deleted'.format(key))    ## corrected!
 
 def handle_stats():
     """Return a tuple containing True and the contents of the STATS dict."""
@@ -151,9 +152,10 @@ def main():
     SOCKET.listen(1)
     while 1:
         connection, address = SOCKET.accept()
-        print 'New connection from [{}]'.format(address)
+        #print 'New connection from [{}]'.format(address)
         data = connection.recv(4096).decode()
         command, key, value = parse_message(data)
+        #print command
         if command == 'STATS':
             response = handle_stats()
         elif command in (
@@ -176,4 +178,7 @@ def main():
         connection.close()
 
 if __name__ == '__main__':
-    main()
+#    try:
+        main()
+#    except:
+#        print "Unexpected error:", sys.exc_info()[0]
