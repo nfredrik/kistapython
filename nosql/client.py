@@ -12,7 +12,7 @@ def get_conn():
 def send_string(st, debug=False):
     s = get_conn()
     s.send(st)
-    print 'sending:', st 
+    #print 'sending:', st 
     data = s.recv(4096).decode()
     if debug:
         print data
@@ -33,7 +33,7 @@ def getlist():
     send_string('GETLIST;bar;;')
 
 def get_stats():
-    send_string('STATS;;;',False)
+    send_string('STATS;;;',True)
 
 def incr_int():
     send_string("INCREMENT;foo;;")
@@ -42,12 +42,21 @@ def del_int():
     send_string("DELETE;foo;;")
 
 def not_impl_cmd():
-    send_string("HELLO;foo;;",True)
-
-commands = [put_int, get_int, putlist, append_string,getlist, get_stats, incr_int , del_int,not_impl_cmd]
+    send_string("HELLO;foo;;",False)
 
 
-for _ in range(100):
+def corrupt_1():
+    send_string('GETLIST;bar;',True)   # missing ;
+
+
+def corrupt_2():
+    send_string('GETLIST;bar;));', True)   # more ))
+
+
+commands = [put_int, get_int, putlist, append_string,getlist,  incr_int , del_int,not_impl_cmd, corrupt_1,corrupt_2]
+
+
+for _ in range(1000):
     commands[randrange(len(commands))]()
 
 get_stats()

@@ -16,13 +16,15 @@ STATS = {
     'APPEND': {'success': 0, 'error': 0},
     'DELETE': {'success': 0, 'error': 0},
     'STATS': {'success': 0, 'error': 0},
+    'INVALID': {'success': 0, 'error': 0},
+    'CORRUPT': {'success': 0, 'error': 0},
     }
 
 
 
 
 
-def parse_message(data):
+def oldparse_message(data):
     """Return a tuple containing the command, the key, and (optionally) the
     value cast to the appropriate type."""
     command, key, value, value_type = data.strip().split(';')
@@ -37,13 +39,45 @@ def parse_message(data):
         value = None
     return command, key, value
 
-def update_stats(command, success):
+def parse_message(data):
+    """Return a tuple containing the command, the key, and (optionally) the
+    value cast to the appropriate type."""
+    try:
+        command, key, value, value_type = data.strip().split(';')
+        if value_type:
+            if value_type == 'LIST':
+                value = value.split(',')
+            elif value_type == 'INT':
+                value = int(value)
+            else:
+                value = str(value)
+        else:
+            value = None
+        return command, key, value
+
+    except ValueError:
+        return 'CORRUPT', None, None
+
+
+def old_update_stats(command, success):
     """Update the STATS dict with info about if executing
     *command* was a *success*."""
     if success:
         STATS[command]['success'] += 1
     else:
         STATS[command]['error'] += 1
+
+def update_stats(command, success):
+    """Update the STATS dict with info about if executing
+    *command* was a *success*."""
+
+    if command in STATS:
+        f = lambda x: 'success' if x else 'error'
+        STATS[command][f(success)] += 1
+    elif command == 'CORRUPT':
+        STATS['CORRUPT']['error'] += 1
+    else:
+        STATS['INVALID']['error'] += 1
 
 
 def handle_put(key, value):
